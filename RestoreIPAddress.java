@@ -3,6 +3,9 @@ StringBuilder sb = new StringBuilder()
 sb.deleteCharAt(sb.length() - 1);  -> delete the final '.'
 result.add(sb.toString()) -> convert StringBuilder to String
 int digit = Integer.valueOf(s); -> 
+整体思路： backtracking + construct new Stirng
+边界条件： list.size() == 4
+valid条件： can not start with ‘0’
 
 */
 
@@ -33,7 +36,7 @@ class Solution {
 			result.add(sb.toString());
 			return;
 		}
-		
+
 		//递归的定义 每次尝试最多3个字符，只有第一个字符符合条件才会继续添加下去
 		for (int i = start; i < s.length() && i < start + 3; i++) {
 			String tmp = s.substring(start, i + 1); //start不变，i + 1向右偏移

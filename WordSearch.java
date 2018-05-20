@@ -1,6 +1,6 @@
 /* Recursive BFS search
 board[i][j] = "#" mark 
-
+backtrack for true/false result
 */
 public class Solution {
 	public boolean exist(char[][] board, String word) {
@@ -10,7 +10,7 @@ public class Solution {
 		if (word.length() == 0) {
 			return true;
 		}
-
+    //search the whole board
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board[0].length; j++) {
 				if (board[i][j] == word.charAt(0)) {
@@ -21,6 +21,7 @@ public class Solution {
 				}
 			}
 		}
+
 		return false;
     }
 

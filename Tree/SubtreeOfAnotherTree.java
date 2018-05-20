@@ -25,7 +25,7 @@ class Solution {
     }
 }
 
-/*Wrong Answer:
+Wrong Answer:
 Input:
 [3,4,5,1,2,null,null,0]
 [4,1,2]
@@ -33,7 +33,7 @@ Output:
 true
 Expected:
 false
-*/
+
 
 class Solution {
     public boolean isSubtree(TreeNode s, TreeNode t) {

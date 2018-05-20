@@ -16,3 +16,32 @@ public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
     
     return a;
 }
+
+
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null && headB == null) {
+            return null;
+        }
+        int lenA = 0;
+        int lenB = 0;
+        for (ListNode p = headA; p != null; p = p.next) lenA++;
+        for (ListNode p = headB; p != null; p = p.next) lenB++;
+        
+        while (lenA < lenB) {
+            headB = headB.next;
+            lenB--;
+        }
+        
+        while (lenB < lenA) {
+            headA = headA.next;
+            lenA--;
+        }
+        
+        while (headA != headB) {
+            headA = headA.next;
+            headB = headB.next;
+        }
+        return headA;   
+    }
+}

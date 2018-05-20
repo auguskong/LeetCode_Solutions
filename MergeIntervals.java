@@ -21,9 +21,10 @@ public List<Interval> merge(List<Interval> intervals) {
 	//use i to track the end, use j to track the start
 	while (i < starts.length) {
 		if (i == starts.length - 1 || ends[i] < starts[i + 1]) {
-				res.add(new Interval(starts[j], ends[i]));
-				j = i + 1; //key point!!
+				res.add(new Interval(starts[j], ends[i])); //add the interval
+				j = i + 1; //key point!! 
 		}
+		//else the interval can be merged, so only move i to the next end!
 		i++; 
 	}
 	return res;
@@ -49,6 +50,7 @@ public List<Interval> merge(List<Interval> intervals) {
 		}
 		else {
 			result.add(new Interval(start, end));
+			//here update 
 			start = interval.start;
 			end = interval.end;
 		}

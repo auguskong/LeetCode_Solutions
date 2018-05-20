@@ -97,7 +97,7 @@ class Solution {
 }
 
 
-//没有对curr进行节点的更新
+//没有对curr进行节点的更新 - 03.28
 class Solution {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         if (l1 == null && l2 == null) {
