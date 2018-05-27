@@ -21,11 +21,12 @@ public class Solution {
 			}
 			//remove smaller numbers inside the window
 			while (!deque.isEmpty() && a[deque.peekLast()] < a[i]) {
-				q.pollLast();
+				deque.pollLast();
 			}
 			deque.offer(i);
+			//wait until the window have set up
 			if (index >= k - 1) {
-				res[index++] = a[q.peek()];
+				res[index++] = a[deque.peek()];
 			}
 		}
 		return res;

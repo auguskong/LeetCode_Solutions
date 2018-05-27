@@ -2,6 +2,7 @@
 public static int getAndRemoveLastElement(Stack<Integer> stack) {
 	int result = stack.pop();
 	if (stack.isEmpty()) {
+		//递归的出口：stack 是空栈
 		return result;
 	} else {
 		int last = getAndRemoveLastElement(stack);
@@ -16,7 +17,6 @@ public static void reverse(Stack<Integer> stack) {
 	if (stack.isEmpty()) { 
 		return;
 	}
-
 	int i = getAndRemoveLastElement(stack);
 
 	reverse(stack);
