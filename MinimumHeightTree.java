@@ -1,7 +1,8 @@
 /*
 * Date: 10/24/2018
-* Type: LinkedList
-* 数据结构: Queue, Adjancency List
+* Type: Graph Search
+* 数据结构: Adjacency Linked List
+*
 */
 
 class Solution {
@@ -24,6 +25,7 @@ class Solution {
 
         for (int i = 0; i < degree.length; i++) {
             if (degree[i] <= 1) {
+                //Corner Case: [1, []] 只有一个节点 degree为0, 但仍然加入
                 queue.add(i);
             }
         }
@@ -39,6 +41,7 @@ class Solution {
                     int next = (int)graph[node].get(k);
                     degree[next]--;
                     if (degree[next] == 1) {
+                        //这里的degree必须为1,至少是一个根节点！！
                         queue.add(next);
                     }
                 }
