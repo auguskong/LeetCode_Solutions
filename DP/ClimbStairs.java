@@ -1,3 +1,8 @@
+/**
+* 求的是到达最后一层有多少种不同的走法,直接做加法
+*
+*
+*/
 class Colution {
 	public int climbStairs(int n) {
 		if (n == 0) return 0;
@@ -12,8 +17,8 @@ class Colution {
 			allSteps = oneStepBefore + twoStepsBefore; //current state
 
 			//next state
-			twoStepsBefore = oneStepBefore; 
-			oneStepBefore = allSteps; 
+			twoStepsBefore = oneStepBefore;
+			oneStepBefore = allSteps;
 		}
 		return allSteps;
 	}

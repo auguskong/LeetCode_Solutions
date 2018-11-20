@@ -27,3 +27,60 @@ class Solution {
         return dp[n];
     }
 }
+
+public int numSquares(int n) {
+    int[] dp = new int[n + 1];
+    Arrays.fill(dp, Integer.MAX_VALUE);
+    dp[0] = 0;
+    for(int i = 1; i <= n; ++i) {
+        int min = Integer.MAX_VALUE;
+        int j = 1;
+        while(i - j*j >= 0) {
+            min = Math.min(min, dp[i - j*j] + 1);
+            ++j;
+        }
+        dp[i] = min;
+    }
+    return dp[n];
+}
+
+class Solution {
+    public int numSquares(int n) {
+        int ans = 0;
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
+        int[] dp = new int[n + 1];
+
+        //initialization
+        for (int i = 1; i <= sqrt; i++) {
+            dp[i * i] = 1;
+        }
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                Math.min(dp[i - j * j] + 1, dp[i - 1] + 1);
+            }
+        }
+
+        return dp[n];
+    }
+}
+
+class Solution {
+    public int numSquares(int n) {
+        int[] dp = new int[n + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
+
+        for (int i = 1; i <= n; i++) {
+            int min = Integer.MAX_VALUE;
+            int j = 1;
+            //错点：这里必须是 j = 1 而不能是j == 0 j == 0时 dp[1]直接更新为MIN_VALUE + 1
+            while (i - j * j >= 0) {
+                min = Math.min(min, dp[i - j * j] + 1);
+                ++j;
+            }
+            dp[i] = min;
+        }
+        return dp[n];
+    }
+}

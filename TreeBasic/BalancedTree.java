@@ -1,12 +1,66 @@
+/*
+* Date: 10/28/2018
+* Type: Binary Tree
+* 思路: 需要考虑遍历次数上的优化
+*
+*/
 
-Submission Result: Wrong Answer 
+// 存在重复遍历的情况 对于每个节点都要判断以当前节点为root的子树是否平衡，
+// 分别要求子树的深度
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        int left = getDepth(root.left);
+        int right = getDepth(root.right);
+
+        if (Math.abs(left - right) > 1) {
+            return false;
+        }
+
+        return isBalanced(root.left) && isBalanced(root.right);
+    }
+
+    private int getDepth(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int left = getDepth(node.left);
+        int right = getDepth(node.right);
+
+        return Math.max(left, right) + 1;
+    }
+}
+
+//遍历一次 O(n)
+public class Solution {
+    public boolean isBalanced(TreeNode root) {
+        return maxDepth(root) != -1;
+    }
+
+    private int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+        if (left == -1 || right == -1 || Math.abs(left-right) > 1) {
+            return -1;
+        }
+        return Math.max(left, right) + 1;
+    }
+}
+
+/*Submission Result: Wrong Answer
 Input:
 [3,9,20,null,null,15,7]
 Output:
 false
 Expected:
 true
-
+*/
 
 class Solution {
     public boolean isBalanced(TreeNode root) {
@@ -15,7 +69,7 @@ class Solution {
         }
         return Math.abs(getHeight(root.left) - getHeight(root.right)) < 1;
     }
-    
+
     public int getHeight(TreeNode root) {
         if (root == null) {
             return 0;
@@ -44,7 +98,7 @@ class Solution {
         }
         return Math.abs(getHeight(root.left) - getHeight(root.right)) <= 1;
     }
-    
+
     public int getHeight(TreeNode root) {
         if (root == null) {
             return 0;
@@ -69,7 +123,7 @@ class Solution {
         }
         return isBalanced(root.left) && isBalanced(root.right);
     }
-    
+
     public int getHeight(TreeNode root) {
         if (root == null) {
             return 0;
@@ -151,3 +205,5 @@ class Solution {
         return Math.max(left, right) + 1;
     }
 }
+
+

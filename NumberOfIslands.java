@@ -1,3 +1,10 @@
+/*
+* Date: 10/24/2018
+* Type: LinkedList
+* 数据结构: Queue, Adjancency List
+* 算法: DFS 搜索
+*/
+
 class NumberOfIslands {
 
     public static void main(String[] args) {

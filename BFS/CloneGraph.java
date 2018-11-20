@@ -4,7 +4,7 @@
 * 数据结构: Queue + HashMap
 */
 
-//为什么需要一个 HashMap??
+//为什么需要一个 HashMap?? A:用来保存复制好的节点，否则会丢失
 
 import java.util.LinkedList;
 import java.util.ArrayList;
