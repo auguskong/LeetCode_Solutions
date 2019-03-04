@@ -37,16 +37,16 @@ class Solution {
         int len = 0;
 
 
-        while (left >= 0 && right < s.length()) {
-            if (s.charAt(left) == s.charAt(right)) {
-                len += left == right ? 1 : 2;
-                left--;
-                right++;
-            } else {
-                // 注意当不满足条件时跳出循环
-                break;
-            }
-        }
+        // while (left >= 0 && right < s.length()) {
+        //     if (s.charAt(left) == s.charAt(right)) {
+        //         len += left == right ? 1 : 2;
+        //         left--;
+        //         right++;
+        //     } else {
+        //         // 注意当不满足条件时跳出循环
+        //         break;
+        //     }
+        // }
 
         //优化: 将字符相等的判断写到while 循环之中
         while (left >= 0 && right < s.length()

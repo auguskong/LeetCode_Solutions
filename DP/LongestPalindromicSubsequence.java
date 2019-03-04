@@ -34,7 +34,7 @@ class Solution {
         //使用滚动数组优化
         for (int i = n - 1; i >= 0; i--) {
             f[i] = 1;
-            int inner = 0;
+            int inner = 0; 
             for (int j = i + 1; j < n; j++) {
                 int localMax = 0;
                 if (s.charAt(i) == s.charAt(j)) {

@@ -21,7 +21,7 @@ class Solution {
             if (nums[mid] == target) {
                 return mid;
             }
-            // nums[mi] > nums[left] 表示mid在左半边
+            // nums[mid] > nums[left] means num[left] and num[mid] on the same side, then we check if target is out the range of num[left] and num[mid]
             if (nums[mid] > nums[left]) {
                 // 判断target已经位于了左半边的范围内，可以完全将右半段舍弃 -> right = mid
                 if (nums[left] <= target && target <= nums[mid]) {

@@ -134,3 +134,19 @@ class Solution {
                     maxCrossingSum(arr, l, m, h));
     }
 }
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int cur = nums[0];
+        int max = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            cur = Math.max(cur + nums[i], nums[i]); // localMax更新必须要考虑当前位置的元素
+            max = Math.max(cur, max); // globalMax的更新只需要比较自身和localMax两个值即可
+        }
+        
+        return max;
+    }
+}

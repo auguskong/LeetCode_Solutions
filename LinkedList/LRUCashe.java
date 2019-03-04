@@ -1,83 +1,97 @@
-class LRUCache {
-	HashMap<Integer, DoubleLinkNode> cache;
-    int capacity;
-    int count;
-    DoubleLinkNode head , tail;
+/**
+* Date: 01/11/2019
+* Type: Implementation
+* 
+*/
 
-    class DoubleLinkNode{
-        int key, value;
-        DoubleLinkNode pre, next;
-        public DoubleLinkNode (int key, int value){
+class LRUCache {
+    class DoubleLinkedNode {
+        DoubleLinkedNode prev;
+        DoubleLinkedNode next;
+        // Save both key and value in the Double Linked ListNode
+        int key;
+        int val;
+        DoubleLinkedNode(int key, int val) {
             this.key = key;
-            this.value = value;
-        }
-        DoubleLinkNode(){
-            this.key = 0;
-            this.value = 0;
+            this.val = val;
+            prev = null;
+            next = null;
         }
     }
+    
+    // Define the global variable head and tail 
+    DoubleLinkedNode head;
+    DoubleLinkedNode tail;
+    HashMap<Integer, DoubleLinkedNode> cache;
+    int capacity;
+    int count;
 
     public LRUCache(int capacity) {
         this.capacity = capacity;
-        this.count = 0;
-        cache = new HashMap<>();
-        head = new DoubleLinkNode();
-        tail = new DoubleLinkNode();
+        count = 0;
+        cache = new HashMap();
+        
+        head = new DoubleLinkedNode(0, 0);
+        tail = new DoubleLinkedNode(0, 0);
         head.next = tail;
-        tail.pre = head;
+        tail.prev = head;
     }
-
-    public int get(int key) {
-        DoubleLinkNode node = cache.get(key);
-        if(node == null)
-            return -1;
-        else{
-            moveToHead(node);
-            return node.value;
-        }
-    }
-
-    public void put(int key, int value) {
-        if(!cache.containsKey(key)){
-            //add it
-            DoubleLinkNode node = new DoubleLinkNode(key, value);
-            cache.put(key,node);
-            addNode(node);
-            count++;
-            if(count>capacity) {
-            DoubleLinkNode tail = removeTail();
-            cache.remove(tail.key);
-            count--;
-            }
-        }
-        else {
-            //move it to head
-            DoubleLinkNode node = cache.get(key);
-            node.value = value;
-            moveToHead(node);
-        }
-    }
-
-    private void addNode(DoubleLinkNode node) {
-        node.next = head.next;
-        node.pre = head;
-        node.next.pre = node;
+    
+    private void addToHead(DoubleLinkedNode node) {
+        DoubleLinkedNode next = head.next;
         head.next = node;
+        node.prev = head;
+        
+        node.next = next;
+        next.prev = node;
     }
-
-    private void moveToHead(DoubleLinkNode node) {
-        removeNode(node);
-        addNode(node);
+    
+    private void remove(DoubleLinkedNode node) {
+        DoubleLinkedNode prev = node.prev;
+        DoubleLinkedNode next = node.next;
+        prev.next = next;
+        next.prev = prev;
+        // point to null node, free the space
+        node.next = null;
+        node.prev = null;
     }
-
-    private void removeNode(DoubleLinkNode node) {
-        node.pre.next = node.next;
-        node.next.pre = node.pre;
+    
+    private void moveToHead(DoubleLinkedNode node) {
+        remove(node);
+        addToHead(node);
     }
-
-    private DoubleLinkNode removeTail() {
-        DoubleLinkNode node = tail.pre;
-        removeNode(node);
-        return node;
+    
+    public int get(int key) {
+        if (!cache.containsKey(key)) {
+            return -1;
+        }
+        DoubleLinkedNode cur = cache.get(key);
+        moveToHead(cur);
+        return cur.val;
+    }
+    
+    public void put(int key, int value) {
+        if (cache.containsKey(key)) {
+            DoubleLinkedNode node = cache.get(key);
+            node.val = value;
+            moveToHead(node);
+        } else {
+            if (count == capacity) {
+                DoubleLinkedNode tailNode = tail.prev;
+                remove(tailNode);
+                cache.remove(tailNode.key);
+            } else {
+                count++;
+            }
+            DoubleLinkedNode curNode = new DoubleLinkedNode(key, value);
+            cache.put(key, curNode);
+            addToHead(curNode);
+        }
     }
 }
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */

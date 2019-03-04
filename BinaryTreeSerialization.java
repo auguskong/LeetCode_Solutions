@@ -120,3 +120,43 @@ public class Codec {
 		return node;
 	}
 }
+/*
+* Date: 1/8/2018
+* Description: Use the Tree traversal to serialize and deserialize the tree
+*/
+public class Codec {
+	private final String SEPERATOR = ",";
+	public String serialize(TreeNode root) {
+		if (root == null) {
+			return "null";
+		}
+		return root.val + SEPERATOR + serialize(root.left) + SEPERATOR + serialize(root.right);
+	}
+
+	// Decodes your encoded data to tree
+	public TreeNode deserialize(String data) {
+		String[] dataArray = data.split(SEPERATOR);
+		Queue<String> queue = new LinkedList<String>();
+		for (String s : dataArray) {
+			// when s is empty string, it means that the node is null
+			queue.add(s);
+		}
+		return deserialize(queue);
+	}
+
+	private TreeNode deserialize(Queue<String> queue) {
+		if (queue.isEmpty()) {
+			return null;
+		}
+
+		String s = queue.poll();
+		if (s.equals("null")) {
+			return null;
+		}
+
+		TreeNode node = new TreeNode(Integer.parseInt(s));
+		node.left = deserialize(queue);
+		node.right = deserialize(queue);
+		return node;
+	}
+}

@@ -28,3 +28,31 @@ public class Solution {
 		return max;
 	}
 }
+
+class Solution {
+    public int trap(int[] height) {
+        if (height == null || height.length == 0) {
+            return 0;
+        }
+        int maxArea = 0;
+        int left = 0;
+        int right = height.length - 1;
+        int leftMax = height[left];
+        int rightMax = height[right];
+        
+        while (left <= right) {
+            if (leftMax <= rightMax) {
+                leftMax = Math.max(height[left], leftMax);
+                maxArea += leftMax - height[left];
+                left++;
+            } else {
+                rightMax = Math.max(height[right], rightMax);
+                maxArea += rightMax - height[right];
+                right--;
+            }
+        }
+        
+        
+        return maxArea;
+    }
+}
